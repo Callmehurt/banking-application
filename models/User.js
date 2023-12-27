@@ -25,10 +25,11 @@ const userSchema = new mongoose.Schema({
     },
     refresh_token: {
         type: String,
+        required: false,
     }
 },
 {
     timestamps: true
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('user', userSchema);
