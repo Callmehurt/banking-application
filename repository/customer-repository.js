@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
 const {CustomerModel} = require('../models');
 const {APIError, STATUS_CODES} = require('../utils/app-errors');
 
 class CustomerRepository{
 
     
-    async createCustomer({name, email, address, phone, password}){
+    async createCustomer({name, email, address, phone, hashedPassword}){
         try{
 
+            const password = hashedPassword;
             const customer = new CustomerModel({
                 name,
                 email,

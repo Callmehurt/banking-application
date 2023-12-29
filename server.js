@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser');
 
 
 //route imports
-
+const {customer} = require('./routes')
 
 //app initiate
 const app = express();
@@ -37,6 +37,8 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
     res.send('<h1>Hello backend</h1>')
 })
+
+customer(app)
 
 
 //call middleware
