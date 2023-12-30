@@ -11,7 +11,7 @@ const accountSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'customer',
         required: false,
-        unique: true
+        unique: false
     },
     transaction: [
         {

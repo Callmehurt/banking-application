@@ -26,6 +26,44 @@ class AccountRepository{
         }
     }
 
+
+    async findAccount({accountNumber}){
+        try{
+
+            const account = await AccountModel.findOne({accountNumber: accountNumber}).populate('customerId');
+            if(!account){
+                throw new APIError(
+                    "API Error",
+                    STATUS_CODES.NOT_FOUND,
+                    "Data not found"
+                  );
+            }
+            return account;
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
+    async addTransaction({accountNumber, transaction}){
+        try{
+
+            const account = await this.findAccount({accountNumber});
+
+            return account;
+
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
 }
 
 module.exports = AccountRepository;

@@ -26,6 +26,38 @@ class AccountService{
     }
 
 
+    async findAccount({accountNumber}){
+        try{
+
+            const account = await this.repository.findAccount({accountNumber});
+            return account;
+
+        }catch(err){
+            console.log(err);
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
+    async addTransaction({fromAccountNumber, toAccountNumber, type, amount}){
+        try{
+
+            
+            return 'ok';
+
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
+
 
 }
 
