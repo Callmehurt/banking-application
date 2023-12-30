@@ -1,4 +1,4 @@
-const {AccountRepository} = require('../repository')
+const {AccountRepository, TransactionRepository} = require('../repository')
 const {APIError, STATUS_CODES} = require('../utils/app-errors');
 
 
@@ -45,10 +45,12 @@ class AccountService{
     async addTransaction({fromAccountNumber, toAccountNumber, type, amount}){
         try{
 
-            
-            return 'ok';
+            const transaction = new TransactionRepository(type, amount);
+            const newTransaction = await transaction.createTransaction();
+            return newTransaction;
 
         }catch(err){
+            console.log(err);
             throw new APIError(
                 "API Error",
                 STATUS_CODES.INTERNAL_ERROR,

@@ -1,7 +1,6 @@
 const {AccountModel} = require('../models')
 const {APIError, STATUS_CODES} = require('../utils/app-errors');
 
-
 class AccountRepository{
 
     async createAccount({accountNumber, customerId}){
@@ -30,7 +29,7 @@ class AccountRepository{
     async findAccount({accountNumber}){
         try{
 
-            const account = await AccountModel.findOne({accountNumber: accountNumber}).populate('customerId');
+            const account = await AccountModel.findOne({accountNumber: accountNumber}).populate('customerId').populate('transaction');
             if(!account){
                 throw new APIError(
                     "API Error",
@@ -48,11 +47,45 @@ class AccountRepository{
         }
     }
 
+    async findAccountViaCustomerId({customerId}){
+        try{
+
+            const account = await AccountModel.findOne({customerId: customerId});
+            if(!account){
+                throw new APIError(
+                    "API Error",
+                    STATUS_CODES.NOT_FOUND,
+                    "Data not found"
+                  );
+            }
+            return account;
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
+    async getBalance({accountNumber}){
+        try{
+
+            return 0;
+
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
     async addTransaction({accountNumber, transaction}){
         try{
 
             const account = await this.findAccount({accountNumber});
-
             return account;
 
         }catch(err){
@@ -62,6 +95,10 @@ class AccountRepository{
                 "Data not found"
               );
         }
+    }
+
+    async deposit({amount}){
+        
     }
 
 }

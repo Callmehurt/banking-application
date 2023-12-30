@@ -20,7 +20,9 @@ module.exports = (app) => {
     app.put('/account/add/transaction', async (req, res, next) => {
         try{
 
-            // const data = await accountService
+            const {fromAccountNumber, toAccountNumber, type, amount} = req.body;
+            const data = await accountService.addTransaction({fromAccountNumber, toAccountNumber, type, amount});
+            return res.json(data);
 
         }catch(err){
             next(err);

@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser');
 
 
 //route imports
-const {customer, account} = require('./routes')
+const {customerAuth, customer, account} = require('./routes')
 
 //app initiate
 const app = express();
@@ -38,6 +38,7 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello backend</h1>')
 })
 
+customerAuth(app);
 customer(app);
 account(app);
 

@@ -17,7 +17,7 @@ module.exports.CustomerValidation = (body) => {
 
 module.exports.TransactionValidation = (body) => {
     const schema = Joi.object({
-        type: Joi.string().valid(...['withdraw', 'deposit']),
+        type: Joi.string().valid(...['withdraw', 'deposit', 'transfered-in', 'transfered-to']),
         amount: Joi.string().required()
         .pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/),
     });

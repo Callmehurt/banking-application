@@ -43,6 +43,41 @@ class CustomerRepository{
               );
         }   
     }
+
+    async findCustomerViaToken({token}){
+        try{
+
+            const customerResult = await CustomerModel.findOne({refreshToken: token});
+            return customerResult;
+
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Unable to find Customer"
+              );
+        }   
+    }
+
+    async updateCustomer(inputs){
+        try{
+
+            const {customerId, ...other} = inputs;
+            const customerResult = await CustomerModel.findByIdAndUpdate(customerId, other, {
+                returnOriginal: false
+            }).exec()
+            return customerResult;
+
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Unable to update Customer"
+              );
+        }   
+    }
+
+
 }
 
 module.exports = CustomerRepository;
