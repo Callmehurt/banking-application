@@ -16,7 +16,8 @@ const accountSchema = new mongoose.Schema({
     transaction: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'transaction'
+            ref: 'transaction',
+            require: true
         }
     ]
 }, {

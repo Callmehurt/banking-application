@@ -13,7 +13,7 @@ module.exports.customerVerify = (req, res, next) => {
         token,
         process.env.ACCESS_SECRET,
         (err, decoded) => {
-            if(err || decoded.userType != "customer"){
+            if(err || decoded.role != "customer"){
                 return res.status(403).json({
                     message: 'Invalid token'
                 })

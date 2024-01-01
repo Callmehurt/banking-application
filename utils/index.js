@@ -59,7 +59,7 @@ module.exports.VerifyToken = async (refreshToken, foundUser) => {
             const accessToken = jwt.sign(
                 {
                     _id: decoded._id,
-                    userType: decoded.userType
+                    role: decoded.role
                 },
                 process.env.ACCESS_SECRET,
                 {expiresIn: '12h'}

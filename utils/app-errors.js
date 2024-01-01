@@ -22,6 +22,7 @@ const STATUS_CODES = {
       this.isOperational = isOperational;
       this.errorStack = errorStack;
       this.logError = logingErrorResponse;
+      this.description = description;
       Error.captureStackTrace(this);
     }
   }

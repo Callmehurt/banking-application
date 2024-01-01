@@ -22,7 +22,7 @@ class AuthService{
                 const validPassword = await ValidatePassword(password, existingCustomer.password, salt);
 
                 if(validPassword){
-                    const {accessToken, refreshToken} = await GenerateSignature({ userType: 'customer', _id: existingCustomer._id});
+                    const {accessToken, refreshToken} = await GenerateSignature({ role: 'customer', _id: existingCustomer._id});
                     const customer = await this.accountRepository.findAccountViaCustomerId({customerId: existingCustomer._id});
                     const {customerId, ...other} = customer._doc;
                     const updateData = {

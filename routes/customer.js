@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const CustomerService = require('../services/customer-service');
 const AccountService = require('../services/account-service');
 const {CustomerValidation} = require('../utils/validation-schema');
+const {customerVerify} = require('../middleware')
 
 
 module.exports = (app) => {

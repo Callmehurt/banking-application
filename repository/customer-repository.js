@@ -59,6 +59,21 @@ class CustomerRepository{
         }   
     }
 
+    async findCustomerViaId({customerId}){
+        try{
+
+            const customerResult = await CustomerModel.findById(customerId);
+            return customerResult;
+
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Unable to find Customer"
+              );
+        }   
+    }
+
     async updateCustomer(inputs){
         try{
 

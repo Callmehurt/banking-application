@@ -4,25 +4,25 @@ const {APIError, STATUS_CODES} = require('../utils/app-errors');
 
 class TransactionRepository{
 
-    constructor(type, amount){
+    constructor(type, description, amount){
         this.type = type;
+        this.description = description;
         this.amount = amount;
     }
 
     async createTransaction(){
 
         const session = await mongoose.startSession();
-
         try{
 
             const data = {
                 type: this.type,
+                description: this.description,
                 amount: parseFloat(this.amount).toFixed(2)
             }
             // return data;
             await session.startTransaction();
             const transaction = await TransactionModel.create(data);
-
             await session.commitTransaction();
             return transaction;
 
@@ -53,6 +53,7 @@ class TransactionRepository{
               );
         }
     }
+
 }
 
 module.exports = TransactionRepository;
