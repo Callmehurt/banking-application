@@ -12,7 +12,7 @@ const cookieParser = require('cookie-parser');
 
 
 //route imports
-const {customerAuth, customer, account} = require('./routes')
+const {customerAuth, customer, account, userAuth} = require('./routes')
 
 //app initiate
 const app = express();
@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 customerAuth(app);
 customer(app);
 account(app);
+userAuth(app);
 
 
 //call middleware

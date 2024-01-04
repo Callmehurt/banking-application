@@ -23,12 +23,19 @@ const userSchema = new mongoose.Schema({
         enum: [UserRoles.staff, UserRoles.admin, UserRoles.customer],
         required: true,
     },
-    refresh_token: {
+    refreshToken: {
         type: String,
         required: false,
     }
 },
 {
+    toJSON: {
+        transform(doc, ret){
+            delete ret.password;
+            delete ret.refreshToken;
+            delete ret.__v;
+        }
+    },
     timestamps: true
 });
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const CustomerService = require('../services/customer-service');
 const AccountService = require('../services/account-service');
 const {CustomerValidation} = require('../utils/validation-schema');
-const {customerVerify} = require('../middleware')
+const {userVerify, verifyRoles} = require('../middleware')
 
 
 module.exports = (app) => {
@@ -11,7 +11,7 @@ module.exports = (app) => {
     const accountService = new AccountService();
 
 
-    app.post('/customer/register', async (req, res, next) => {
+    app.post('/customer/register', userVerify, verifyRoles(['staff', 'admin']),async (req, res, next) => {
 
         const session = await mongoose.startSession();
 

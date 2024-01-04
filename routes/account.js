@@ -2,7 +2,8 @@ const AccountService = require('../services/account-service');
 const CustomerService = require('../services/customer-service');
 const {customerVerify} = require('../middleware');
 const {TransactionValidation, DepositValidation, WithdrawValidation, TransferValidation} = require('../utils/validation-schema');
-const {Transactions} = require('../enums')
+const {Transactions} = require('../enums');
+const {userVerify, verifyRoles} = require('../middleware')
 
 
 module.exports = (app) => {
@@ -112,7 +113,7 @@ module.exports = (app) => {
         }
     })
 
-    app.get('/account/detail/:accountNumber' ,async (req, res, next) => {
+    app.get('/account/detail/:accountNumber', userVerify, async (req, res, next) => {
         try{
 
             const accountNumber = req.params.accountNumber;
