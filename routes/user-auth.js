@@ -39,4 +39,34 @@ module.exports = (app) => {
         }
     })
 
+    app.get('/auth/user/logout', async (req, res, next) => {
+        try{
+
+            //on client, also delete the access token
+            const cookie = req.cookies;
+
+            if(!cookie?.jwt){
+                return res.status(500).json({
+                    message: 'Invalid token'
+                });            
+            }
+
+            const refreshToken = cookie.jwt;
+            const user = await authService.logoutUser(refreshToken);
+            if(!user){
+                res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true});
+                return res.status(204).json({
+                    message: 'Invalid token'
+                });
+            }
+            res.clearCookie('jwt', {httpOnly: true, sameSite: 'None', secure: true})
+            return res.status(200).json({
+                message: 'Logout successfull'
+            })
+
+        }catch(err){
+            return res.status(500).json(err);
+        }
+    })
+
 }

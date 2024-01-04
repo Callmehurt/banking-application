@@ -18,13 +18,15 @@ try {
             username: 'staff',
             email: 'staff@mail.com',
             password: password,
-            role: UserRoles.staff
+            role: UserRoles.staff,
+            refreshToken: ''
         },
         {
             username: 'admin',
             email: 'admin@mail.com',
             password: password,
-            role: UserRoles.admin
+            role: UserRoles.admin,
+            refreshToken: ''
         },
     ]
 

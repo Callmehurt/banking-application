@@ -156,6 +156,23 @@ class AuthService{
             throw err;
         }
     }
+
+    async logoutUser(token){
+        try{
+            const user = await this.userRepository.findUserViaToken({token});
+            if(user){
+                const updateField = {
+                    userId: user._id,
+                    refreshToken: ''
+                }
+                await this.userRepository.updateUser(updateField);
+            }
+            return user;
+        }catch(err){
+            console.log(err);
+            throw err;
+        }
+    }
 }
 
 module.exports = AuthService;
