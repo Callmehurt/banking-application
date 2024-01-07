@@ -53,6 +53,36 @@ class CustomerService{
             ) 
         }
     }
+
+    async updateCustomer(data){
+        try{
+
+            const result = this.repository.updateCustomer(data);
+            return result;
+            
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                'Customer update failed'
+            ) 
+        }
+    }
+
+    async deleteCustomer({customerId}){
+        try{
+
+            const result = this.repository.deleteCustomer({customerId});
+            return result;
+            
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                'Record not found'
+            ) 
+        }
+    }
 }
 
 module.exports = CustomerService;

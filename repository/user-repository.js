@@ -4,10 +4,10 @@ const {APIError, STATUS_CODES} = require('../utils/app-errors');
 
 class UserRepository{
 
-    async findUserViaUsername({username}){
+    async findUserViaEmail({email}){
         try{
 
-            const user = await UserModel.findOne({username: username});
+            const user = await UserModel.findOne({email: email});
             return user;
 
         }catch(err){

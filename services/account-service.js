@@ -1,7 +1,6 @@
 const {AccountRepository, TransactionRepository} = require('../repository')
 const {APIError, STATUS_CODES} = require('../utils/app-errors');
 const {Transactions} = require('../enums');
-const Transaction = require('../models/Transaction');
 
 
 class AccountService{

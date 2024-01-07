@@ -92,9 +92,9 @@ class AuthService{
     async staffSignin(inputs){
         try{
 
-            const {username, password} = inputs;
+            const {email, password} = inputs;
 
-            const existingStaff = await this.userRepository.findUserViaUsername({username});
+            const existingStaff = await this.userRepository.findUserViaEmail({email});
 
             if(existingStaff){
             
@@ -168,6 +168,23 @@ class AuthService{
                 await this.userRepository.updateUser(updateField);
             }
             return user;
+        }catch(err){
+            console.log(err);
+            throw err;
+        }
+    }
+
+    async logoutCustomer(token){
+        try{
+            const customer = await this.customerRepository.findCustomerViaToken({token});
+            if(customer){
+                const updateField = {
+                    customerId: customer._id,
+                    refreshToken: ''
+                }
+                await this.customerRepository.updateCustomer(updateField);
+            }
+            return customer;
         }catch(err){
             console.log(err);
             throw err;

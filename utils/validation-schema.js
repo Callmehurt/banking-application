@@ -15,6 +15,21 @@ module.exports.CustomerValidation = (body) => {
     return schema.validate(body);
 }
 
+module.exports.CustomerUpdateValidation = (body) => {
+    const schema = Joi.object({
+        customerId: Joi.required(),
+        name: Joi.string().required(),
+        address: Joi.string().required(),
+        phone: Joi.string().required()
+        .pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)
+        .min(10) 
+        .max(10),
+        email: Joi.string().email().required().label("Email"),
+    });
+
+    return schema.validate(body);
+}
+
 module.exports.TransactionValidation = (body) => {
     const schema = Joi.object({
         type: Joi.string().valid(...['withdraw', 'deposit', 'transfered-in', 'transfered-to']),

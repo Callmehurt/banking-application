@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 
+const Account = require('./Account');
+
 const customerSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -39,5 +41,6 @@ const customerSchema = new mongoose.Schema({
     timestamps: true
 }
 );
+
 
 module.exports = mongoose.model('customer', customerSchema);
