@@ -69,6 +69,27 @@ class AccountRepository{
         }
     }
 
+    async fetchAllAccounts(){
+        try{
+
+            const account = await AccountModel.find({}).populate('customerId').populate('transaction');
+            if(!account){
+                throw new APIError(
+                    "API Error",
+                    STATUS_CODES.NOT_FOUND,
+                    "Data not found"
+                  );
+            }
+            return account;
+        }catch(err){
+            throw new APIError(
+                "API Error",
+                STATUS_CODES.INTERNAL_ERROR,
+                "Data not found"
+              );
+        }
+    }
+
     async getBalance({accountNumber}){
         try{
 
@@ -76,7 +97,11 @@ class AccountRepository{
             const transactions = account.transaction;
 
             if(transactions.length < 1){
-                return parseFloat(0).toFixed(2);
+                return {
+                    balance: parseFloat(0).toFixed(2),
+                    totalCredit: parseFloat(0).toFixed(2),
+                    totalDebit: parseFloat(0).toFixed(2)
+                };
             }
 
             let balance = 0;
@@ -100,8 +125,8 @@ class AccountRepository{
 
             return {
                 balance: balance.toFixed(2),
-                totalCredit,
-                totalDebit
+                totalCredit: totalCredit,
+                totalDebit: totalDebit
             };
 
         }catch(err){

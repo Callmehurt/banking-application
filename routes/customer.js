@@ -66,8 +66,9 @@ module.exports = (app) => {
                 });
             }
 
-            return res.status(500).json({
-                message: "Customer updated successfully"
+            return res.status(200).json({
+                message: "Customer updated successfully",
+                customer: result
             });
             
         }catch(err){
@@ -86,7 +87,7 @@ module.exports = (app) => {
                 });
             }
 
-            return res.status(500).json({
+            return res.status(200).json({
                 message: "Customer deleted successfully"
             });
             
