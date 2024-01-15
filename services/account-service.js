@@ -12,7 +12,8 @@ class AccountService{
     async createAccount({customerId}){
         try{
 
-            const accountNumber = (Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000).toString();
+            // const accountNumber = (Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000).toString();
+            const accountNumber = (Math.floor(1000000000 + Math.random() * 9000000000)).toString();
             let account = await this.repository.createAccount({accountNumber, customerId});
             return account;
 
