@@ -11,19 +11,19 @@ try {
     console.log('Connected to MongoDB');
     
     const salt =  await GenerateSalt();
-    const password =  await GeneratePassword('nepal123', salt);
+    const password =  await GeneratePassword('london123', salt);
 
     const seedUsers = [
         {
-            username: 'staff',
-            email: 'staff@mail.com',
+            username: 'Random Staff',
+            email: 'randomstaff@mail.com',
             password: password,
             role: UserRoles.staff,
             refreshToken: ''
         },
         {
-            username: 'admin',
-            email: 'admin@mail.com',
+            username: 'Random Admin',
+            email: 'randomadmin@mail.com',
             password: password,
             role: UserRoles.admin,
             refreshToken: ''

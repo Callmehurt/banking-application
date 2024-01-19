@@ -12,8 +12,8 @@ class AccountService{
     async createAccount({customerId}){
         try{
 
-            // const accountNumber = (Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000).toString();
-            const accountNumber = (Math.floor(1000000000 + Math.random() * 9000000000)).toString();
+            //creating random account number for the customer
+            const accountNumber = (Math.floor(1000000 + Math.random() * 9000000)).toString();
             let account = await this.repository.createAccount({accountNumber, customerId});
             return account;
 
@@ -106,7 +106,7 @@ class AccountService{
             var initiatorAccount = await this.repository.findAccount({accountNumber});
             var {balance} = await this.getBalance({accountNumber});
             const initiatorBalance = balance;
-            if(initiatorBalance < amount){
+            if(parseFloat(initiatorBalance) < parseFloat(amount)){
                 throw new APIError(
                     "API Error",
                     STATUS_CODES.INTERNAL_ERROR,
@@ -130,6 +130,8 @@ class AccountService{
             }
         }
     }
+
+    
     async transfer({initiatorAccountNumber, receiverAccountNumber, amount}){
         try{
             if(!receiverAccountNumber){
